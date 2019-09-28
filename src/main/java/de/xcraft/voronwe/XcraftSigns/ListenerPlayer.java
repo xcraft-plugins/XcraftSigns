@@ -135,15 +135,15 @@ public class ListenerPlayer implements Listener {
                 this.plugin.log.info(
                     this.plugin.getNameBrackets() + "Checkpoint " + cpUnlockSign.getName() + " von " + player
                         .getName() + " freigeschaltet");
-                if (player.hasPermission("XcraftSigns.Checkpoint.heal")) {
+                if (player.hasPermission("XcraftSigns.checkpoints.heal")) {
                     player.setHealth(20.0);
                 }
                 return true;
             }
-            if (player.hasPermission("XcraftSigns.Checkpoint.heal")) {
+            if (player.hasPermission("XcraftSigns.checkpoints.heal")) {
                 player.setHealth(20.0);
             }
-            if (player.hasPermission("XcraftSigns.Checkpoint.spawn")) {
+            if (player.hasPermission("XcraftSigns.checkpoints.spawn")) {
                 player.setBedSpawnLocation(cpUnlockSign.getLocation(), true);
                 player.sendMessage(
                     this.getChatprefix() + (Object) ChatColor.DARK_AQUA + "Spawnpunkt gesetzt!");

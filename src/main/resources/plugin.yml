@@ -11,18 +11,24 @@ commands:
     description: Sign manipulation
     usage: /<command> help
 permissions:
-  XcraftSigns.CheckPoints.unlock:
-    description: Access to checkpoint unlock signs
+  XcraftSigns.checkpoints.unlock:
+    description: Access to checkpoint unlock signs (not implemented)
     default: true
-  XcraftSigns.CheckPoints.entry:
-    description: Access to checkpoint entry signs
+  XcraftSigns.checkpoints.entry:
+    description: Access to checkpoint entry signs (not implemented)
     default: true
-  XcraftSigns.CheckPoints.create:
+  XcraftSigns.checkpoints.create:
     description: Access to checkpoint entry signs
     default: op
-  XcraftSigns.Signs.color:
+  XcraftSigns.checkpoints.heal:
+    description: Access to checkpoint entry signs
+    default: true
+  XcraftSigns.checkpoints.spawn:
+    description: Access to checkpoint entry signs
+    default: true
+  XcraftSigns.signs.color:
     description: Allows using colors on signs
     default: op
-  XcraftSigns.Signs.edit:
+  XcraftSigns.signs.edit:
     description: Allows editing of signs
     default: op

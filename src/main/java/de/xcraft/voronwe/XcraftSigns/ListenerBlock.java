@@ -22,7 +22,7 @@ public class ListenerBlock implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        if (event.getPlayer().hasPermission("XcraftSigns.Checkpoint.create")
+        if (event.getPlayer().hasPermission("XcraftSigns.checkpoints.create")
             && !event.isCancelled()) {
             if (event.getBlock().getType() == Material.WALL_SIGN
                 && this.plugin.getCPUnlockSigns()
@@ -54,7 +54,7 @@ public class ListenerBlock implements Listener {
             }
             sign.update();
         }
-        if (event.getPlayer().hasPermission("XcraftSigns.Checkpoint.create")
+        if (event.getPlayer().hasPermission("XcraftSigns.checkpoints.create")
             && event.getLine(0).length() > 10
             && event.getLine(0).equalsIgnoreCase("[cp_unlock]")) {
             CPUnlockSign newSign = new CPUnlockSign(
@@ -65,7 +65,7 @@ public class ListenerBlock implements Listener {
             event.setCancelled(true);
             this.plugin.getCPUnlockSigns().add(newSign);
         }
-        if (event.getPlayer().hasPermission("XcraftSigns.Checkpoint.create")
+        if (event.getPlayer().hasPermission("XcraftSigns.checkpoints.create")
             && event.getLine(0).length() > 9
             && event.getLine(0).equalsIgnoreCase("[cp_entry]")) {
             String name = event.getLine(1);
