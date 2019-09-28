@@ -8,7 +8,7 @@ depend: [XcraftLibrary]
 
 commands:
   xcs:
-    description: Sign manipulation
+    description: Sign manipulation (not implemented)
     usage: /<command> help
 permissions:
   XcraftSigns.checkpoints.unlock:

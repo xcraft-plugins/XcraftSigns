@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.xcraft.voronwe</groupId>
+    <groupId>de.groovybyte.spigot</groupId>
     <artifactId>XcraftSigns</artifactId>
-    <version>1.13.2</version>
+    <version>1.14.0</version>
 
     <name>XcraftSigns</name>
     <url>https://github.com/xcraft-plugins/XcraftSigns</url>
@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.13.2-R0.1-SNAPSHOT</version>
+            <version>1.14.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
