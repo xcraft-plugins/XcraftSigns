@@ -1,28 +1,15 @@
 package de.xcraft.voronwe.XcraftSigns.Checkpoints;
 
-import de.xcraft.voronwe.XcraftSigns.Checkpoints.CPUnlockSign;
 import de.xcraft.voronwe.XcraftSigns.Util.SLocation;
 import de.xcraft.voronwe.XcraftSigns.XcraftSigns;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.logging.Logger;
 import org.bukkit.Location;
 import org.yaml.snakeyaml.Yaml;
 
 public class CPUnlockSignSet
-implements Iterable<CPUnlockSign> {
+    implements Iterable<CPUnlockSign> {
     private Map<String, CPUnlockSign> signs = new HashMap<String, CPUnlockSign>();
+import java.io .*;
+import java.util .*;
     private XcraftSigns plugin;
 
     public CPUnlockSignSet(XcraftSigns plugin) {
@@ -38,26 +25,29 @@ implements Iterable<CPUnlockSign> {
         int counter = 0;
         try {
             Yaml yaml = new Yaml();
-            Map signsYaml = (Map)yaml.load((InputStream)new FileInputStream(configFile));
+            Map signsYaml = (Map) yaml.load((InputStream) new FileInputStream(configFile));
             if (signsYaml == null) {
-                this.plugin.log.info(this.plugin.getNameBrackets() + "empty CPUnlockSigns.yml - initializing");
+                this.plugin.log.info(
+                    this.plugin.getNameBrackets() + "empty CPUnlockSigns.yml - initializing");
                 return;
             }
             for (Map.Entry thisSign : signsYaml.entrySet()) {
-                Map signData = (Map)thisSign.getValue();
-                CPUnlockSign newSign = new CPUnlockSign((String)signData.get("location"), (String)signData.get("playerlocation"), (String)signData.get("name"), signData.get("reward").toString());
-                List unlockedPlayers = (List)signData.get("unlockedplayers");
+                Map signData = (Map) thisSign.getValue();
+                CPUnlockSign newSign = new CPUnlockSign((String) signData.get("location"),
+                    (String) signData.get("playerlocation"), (String) signData.get("name"),
+                    signData.get("reward").toString());
+                List unlockedPlayers = (List) signData.get("unlockedplayers");
                 for (String thisPlayer : unlockedPlayers) {
                     newSign.unlockPlayer(UUID.fromString(thisPlayer));
                 }
                 this.add(newSign);
                 ++counter;
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-        this.plugin.log.info(this.plugin.getNameBrackets() + "loaded " + counter + " CheckPoint Unlock Signs");
+        this.plugin.log.info(
+            this.plugin.getNameBrackets() + "loaded " + counter + " CheckPoint Unlock Signs");
     }
 
     public void save() {
@@ -73,8 +63,7 @@ implements Iterable<CPUnlockSign> {
             new PrintStream(fh).println(dump);
             fh.flush();
             fh.close();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

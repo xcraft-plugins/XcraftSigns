@@ -6,25 +6,24 @@ public class Cast {
             return 0;
         }
         if (o instanceof Byte) {
-            return (int)((Byte)o);
+            return (int) ((Byte) o);
         }
         if (o instanceof Integer) {
-            return (Integer)o;
+            return (Integer) o;
         }
         if (o instanceof Double) {
-            return (int)((Double)o).doubleValue();
+            return (int) ((Double) o).doubleValue();
         }
         if (o instanceof Float) {
-            return (int)((Float)o).floatValue();
+            return (int) ((Float) o).floatValue();
         }
         if (o instanceof Long) {
-            return (int)((Long)o).longValue();
+            return (int) ((Long) o).longValue();
         }
         if (o instanceof String) {
             try {
-                return Integer.parseInt((String)o);
-            }
-            catch (Exception ex) {
+                return Integer.parseInt((String) o);
+            } catch (Exception ex) {
                 return 0;
             }
         }
@@ -36,25 +35,24 @@ public class Cast {
             return 0.0;
         }
         if (o instanceof Byte) {
-            return ((Byte)o).byteValue();
+            return ((Byte) o).byteValue();
         }
         if (o instanceof Integer) {
-            return ((Integer)o).intValue();
+            return ((Integer) o).intValue();
         }
         if (o instanceof Double) {
-            return (Double)o;
+            return (Double) o;
         }
         if (o instanceof Float) {
-            return ((Float)o).floatValue();
+            return ((Float) o).floatValue();
         }
         if (o instanceof Long) {
-            return ((Long)o).longValue();
+            return ((Long) o).longValue();
         }
         if (o instanceof String) {
             try {
-                return Double.parseDouble((String)o);
-            }
-            catch (Exception ex) {
+                return Double.parseDouble((String) o);
+            } catch (Exception ex) {
                 return 0.0;
             }
         }
@@ -66,10 +64,10 @@ public class Cast {
             return false;
         }
         if (o instanceof Boolean) {
-            return (Boolean)o;
+            return (Boolean) o;
         }
         if (o instanceof String) {
-            return ((String)o).equalsIgnoreCase("true");
+            return ((String) o).equalsIgnoreCase("true");
         }
         return false;
     }

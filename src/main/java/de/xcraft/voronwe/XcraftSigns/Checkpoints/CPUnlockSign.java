@@ -1,25 +1,17 @@
 package de.xcraft.voronwe.XcraftSigns.Checkpoints;
 
-import de.xcraft.voronwe.XcraftSigns.Checkpoints.CPUnlockSignSet;
 import de.xcraft.voronwe.XcraftSigns.Util.Cast;
 import de.xcraft.voronwe.XcraftSigns.Util.SLocation;
 import de.xcraft.voronwe.XcraftSigns.XcraftSigns;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
+
+import java.util.*;
 
 public class CPUnlockSign {
     private String location;
@@ -64,7 +56,9 @@ public class CPUnlockSign {
         if (!this.hasDependency()) {
             return null;
         }
-        XcraftSigns plugin = (XcraftSigns)Bukkit.getServer().getPluginManager().getPlugin("XcraftSigns");
+        XcraftSigns plugin = (XcraftSigns) Bukkit.getServer()
+            .getPluginManager()
+            .getPlugin("XcraftSigns");
         return plugin.getCPUnlockSigns().getSignByName(this.depends);
     }
 
@@ -143,13 +137,12 @@ public class CPUnlockSign {
         }
         Block block = myLoc.getWorld().getBlockAt(myLoc);
         if ((block.getType() == Material.WALL_SIGN || block.getType() == Material.SIGN) && block.getState() instanceof Sign) {
-            Sign sign = (Sign)block.getState();
-            sign.setLine(0, "[" + (Object)ChatColor.DARK_BLUE + "Checkpoint" + (Object)ChatColor.BLACK + "]");
-            sign.setLine(1, (Object)ChatColor.AQUA + "Freischalten");
+            Sign sign = (Sign) block.getState();
+            sign.setLine(0, "[" + ChatColor.DARK_BLUE + "Checkpoint" + ChatColor.BLACK + "]");
+            sign.setLine(1, ChatColor.AQUA + "Freischalten");
             sign.setLine(2, "" + this.getName());
             sign.setLine(3, "" + this.getReward());
             sign.update(true);
         }
     }
 }
-

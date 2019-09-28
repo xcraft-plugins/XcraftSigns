@@ -1,16 +1,15 @@
 package de.xcraft.voronwe.XcraftSigns.Checkpoints;
 
 import de.xcraft.voronwe.XcraftSigns.Util.SLocation;
-import java.util.HashMap;
-import java.util.Map;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.material.Lever;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CPEntrySign {
     private String location;
@@ -69,16 +68,15 @@ public class CPEntrySign {
 
     public boolean activate() {
         if (this.getLever() != null && !this.activated) {
-            ((Lever)this.getLever()).setPowered(true);
-            this.activated = true;
-            return true;
+            ((Lever) this.getLever()).setPowered(true);
+            return this.activated = true;
         }
         return false;
     }
 
     public void deactivate() {
         if (this.getLever() != null) {
-            ((Lever)this.getLever()).setPowered(false);
+            ((Lever) this.getLever()).setPowered(false);
             this.activated = false;
         }
     }
@@ -118,13 +116,12 @@ public class CPEntrySign {
         }
         Block block = myLoc.getWorld().getBlockAt(myLoc);
         if ((block.getType() == Material.WALL_SIGN || block.getType() == Material.SIGN) && block.getState() instanceof Sign) {
-            Sign sign = (Sign)block.getState();
-            sign.setLine(0, "[" + (Object)ChatColor.DARK_BLUE + "Checkpoint" + (Object)ChatColor.BLACK + "]");
-            sign.setLine(1, (Object)ChatColor.AQUA + "Betreten");
+            Sign sign = (Sign) block.getState();
+            sign.setLine(0, "[" + ChatColor.DARK_BLUE + "Checkpoint" + ChatColor.BLACK + "]");
+            sign.setLine(1, ChatColor.AQUA + "Betreten");
             sign.setLine(2, "" + this.getName());
             sign.setLine(3, "" + this.getReward());
             sign.update(true);
         }
     }
 }
-
