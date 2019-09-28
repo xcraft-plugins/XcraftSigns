@@ -81,20 +81,14 @@ public class ListenerPlayer implements Listener {
                     }
                 } else {
                     Location loc = cpUnlockSign.getPlayerLocation();
-                    Float yaw = Float.valueOf(player.getLocation().getYaw());
-                    Float pitch = Float.valueOf(player.getLocation().getPitch());
-                    loc.setPitch(pitch.floatValue());
-                    loc.setYaw(yaw.floatValue());
+                    loc.setPitch(player.getLocation().getPitch());
+                    loc.setYaw(player.getLocation().getYaw());
                     final Location targetLoc = loc;
                     final Player finalPlayer = player;
                     this.plugin.getServer()
                         .getScheduler()
-                        .scheduleSyncDelayedTask((Plugin) this.plugin, new Runnable() {
-
-                            public void run() {
-                                finalPlayer.teleport(targetLoc);
-                            }
-                        }, 2L);
+                        .scheduleSyncDelayedTask(this.plugin,
+                            () -> finalPlayer.teleport(targetLoc), 2L);
                 }
             }
         }

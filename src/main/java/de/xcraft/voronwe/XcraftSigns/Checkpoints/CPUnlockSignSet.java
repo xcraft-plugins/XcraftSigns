@@ -5,11 +5,12 @@ import de.xcraft.voronwe.XcraftSigns.XcraftSigns;
 import org.bukkit.Location;
 import org.yaml.snakeyaml.Yaml;
 
+import java.io.*;
+import java.util.*;
+
 public class CPUnlockSignSet
     implements Iterable<CPUnlockSign> {
     private Map<String, CPUnlockSign> signs = new HashMap<String, CPUnlockSign>();
-import java.io .*;
-import java.util .*;
     private XcraftSigns plugin;
 
     public CPUnlockSignSet(XcraftSigns plugin) {
@@ -25,18 +26,18 @@ import java.util .*;
         int counter = 0;
         try {
             Yaml yaml = new Yaml();
-            Map signsYaml = (Map) yaml.load((InputStream) new FileInputStream(configFile));
+            Map<String, Map<String, Object>> signsYaml = yaml.load((InputStream) new FileInputStream(configFile));
             if (signsYaml == null) {
                 this.plugin.log.info(
                     this.plugin.getNameBrackets() + "empty CPUnlockSigns.yml - initializing");
                 return;
             }
-            for (Map.Entry thisSign : signsYaml.entrySet()) {
-                Map signData = (Map) thisSign.getValue();
+            for (Map.Entry<String, Map<String, Object>> thisSign : signsYaml.entrySet()) {
+                Map<String, Object> signData = thisSign.getValue();
                 CPUnlockSign newSign = new CPUnlockSign((String) signData.get("location"),
                     (String) signData.get("playerlocation"), (String) signData.get("name"),
                     signData.get("reward").toString());
-                List unlockedPlayers = (List) signData.get("unlockedplayers");
+                List<String> unlockedPlayers = (List<String>) signData.get("unlockedplayers");
                 for (String thisPlayer : unlockedPlayers) {
                     newSign.unlockPlayer(UUID.fromString(thisPlayer));
                 }

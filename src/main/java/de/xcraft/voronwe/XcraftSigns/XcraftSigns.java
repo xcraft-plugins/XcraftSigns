@@ -14,24 +14,24 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final Logger log=Logger.getLogger("Minecraft");
-private Plugin vault=null;
-private Economy economy=null;
-private final ListenerBlock blockListener=new ListenerBlock(this);
-private final ListenerPlayer playerListener=new ListenerPlayer(this);
-private final CPUnlockSignSet cpUnlockSigns=new CPUnlockSignSet(this);
-private final CPEntrySignSet cpEntrySigns=new CPEntrySignSet(this);
-private PluginManager pm=null;
-
-    import java.io.File;
-    import java.io.FileWriter;
-    import java.io.IOException;
-    import java.io.PrintWriter;
-    import java.text.SimpleDateFormat;
-    import java.util.Date;
-    import java.util.logging.Logger;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Logger;
 
 public class XcraftSigns extends JavaPlugin {
+    public final Logger log = Logger.getLogger("Minecraft");
+    private Plugin vault = null;
+    private Economy economy = null;
+    private final ListenerBlock blockListener = new ListenerBlock(this);
+    private final ListenerPlayer playerListener = new ListenerPlayer(this);
+    private final CPUnlockSignSet cpUnlockSigns = new CPUnlockSignSet(this);
+    private final CPEntrySignSet cpEntrySigns = new CPEntrySignSet(this);
+    private PluginManager pm = null;
+
     public void onEnable() {
         this.pm = this.getServer().getPluginManager();
         this.pm.registerEvents((Listener) this.blockListener, (Plugin) this);

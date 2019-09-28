@@ -11,10 +11,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-private Map<String, CPEntrySign> signs=new HashMap<String, CPEntrySign>();
 
 public class CPEntrySignSet implements Iterable<CPEntrySign> {
     private XcraftSigns plugin;
+    private Map<String, CPEntrySign> signs = new HashMap<String, CPEntrySign>();
 
     public CPEntrySignSet(XcraftSigns plugin) {
         this.plugin = plugin;
@@ -29,14 +29,14 @@ public class CPEntrySignSet implements Iterable<CPEntrySign> {
         int counter = 0;
         try {
             Yaml yaml = new Yaml();
-            Map signsYaml = (Map) yaml.load((InputStream) new FileInputStream(configFile));
+            Map<String, Map<String, String>> signsYaml = yaml.load((InputStream) new FileInputStream(configFile));
             if (signsYaml == null) {
                 this.plugin.log.info(
                     this.plugin.getNameBrackets() + "empty CPEntrySigns.yml - initializing");
                 return;
             }
-            for (Map.Entry thisSign : signsYaml.entrySet()) {
-                Map signData = (Map) thisSign.getValue();
+            for (Map.Entry<String, Map<String, String>> thisSign : signsYaml.entrySet()) {
+                Map<String, String> signData = (Map<String, String>) thisSign.getValue();
                 CPEntrySign newSign = new CPEntrySign((String) signData.get("location"),
                     (String) signData.get("leverlocation"), (String) signData.get("name"));
                 newSign.setDuration(Cast.castInt(signData.get("duration")));
