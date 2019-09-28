@@ -1,0 +1,28 @@
+name: XcraftSigns
+main: de.xcraft.voronwe.XcraftSigns.XcraftSigns
+version: ${pom.version}
+authors: [Voronwe]
+load: POSTWORLD
+
+depend: [XcraftLibrary]
+
+commands:
+  xcs:
+    description: Sign manipulation
+    usage: /<command> help
+permissions:
+  XcraftSigns.CheckPoints.unlock:
+    description: Access to checkpoint unlock signs
+    default: true
+  XcraftSigns.CheckPoints.entry:
+    description: Access to checkpoint entry signs
+    default: true
+  XcraftSigns.CheckPoints.create:
+    description: Access to checkpoint entry signs
+    default: op
+  XcraftSigns.Signs.color:
+    description: Allows using colors on signs
+    default: op
+  XcraftSigns.Signs.edit:
+    description: Allows editing of signs
+    default: op
