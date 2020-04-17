@@ -1,8 +1,11 @@
 name: XcraftSigns
 main: de.xcraft.voronwe.XcraftSigns.XcraftSigns
 version: ${pom.version}
-authors: [Voronwe]
+authors:
+  - Voronwe
+  - MyNameIsJan
 load: POSTWORLD
+api-version: 1.15
 
 depend: [XcraftLibrary]
 

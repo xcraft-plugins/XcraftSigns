@@ -10,8 +10,8 @@ public class SLocation {
         if (location.getWorld() != null) {
             DecimalFormat df = new DecimalFormat("0.##");
             return location.getWorld().getName() + "," + df.format(location.getX())
-                .replace(",", ".") + "," + df.format(location.getY())
-                .replace(",", ".") + "," + df.format(location.getZ()).replace(",", ".");
+                                                           .replace(",", ".") + "," + df.format(location.getY())
+                                                                                        .replace(",", ".") + "," + df.format(location.getZ()).replace(",", ".");
         }
         return null;
     }

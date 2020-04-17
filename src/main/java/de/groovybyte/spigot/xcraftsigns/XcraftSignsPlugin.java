@@ -42,12 +42,12 @@ public class XcraftSignsPlugin extends JavaPlugin {
 
     private void registerSaveJob() {
         getServer().getScheduler()
-            .runTaskTimerAsynchronously(
-                this,
-                this::saveState,
-                AUTO_SAVE_DELAY,
-                AUTO_SAVE_DELAY
-            );
+                   .runTaskTimerAsynchronously(
+                       this,
+                       this::saveState,
+                       AUTO_SAVE_DELAY,
+                       AUTO_SAVE_DELAY
+                   );
     }
 
     private void saveState() {
@@ -59,8 +59,8 @@ public class XcraftSignsPlugin extends JavaPlugin {
         Plugin vault = getServer().getPluginManager().getPlugin("Vault");
         if (vault != null && vault.isEnabled()) {
             RegisteredServiceProvider<Economy> economyProvider = getServer()
-                .getServicesManager()
-                .getRegistration(Economy.class);
+                                                                     .getServicesManager()
+                                                                     .getRegistration(Economy.class);
             if (economyProvider != null) {
                 this.economy = economyProvider.getProvider();
                 this.getLogger().info("Found economy provider: " + this.economy.getName());

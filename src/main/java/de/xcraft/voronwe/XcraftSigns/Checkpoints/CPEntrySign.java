@@ -3,7 +3,6 @@ package de.xcraft.voronwe.XcraftSigns.Checkpoints;
 import de.xcraft.voronwe.XcraftSigns.Util.SLocation;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.material.Lever;
@@ -115,7 +114,7 @@ public class CPEntrySign {
             return;
         }
         Block block = myLoc.getWorld().getBlockAt(myLoc);
-        if ((block.getType() == Material.WALL_SIGN || block.getType() == Material.SIGN) && block.getState() instanceof Sign) {
+        if (block.getType().name().contains("SIGN") && block.getState() instanceof Sign) {
             Sign sign = (Sign) block.getState();
             sign.setLine(0, "[" + ChatColor.DARK_BLUE + "Checkpoint" + ChatColor.BLACK + "]");
             sign.setLine(1, ChatColor.AQUA + "Betreten");

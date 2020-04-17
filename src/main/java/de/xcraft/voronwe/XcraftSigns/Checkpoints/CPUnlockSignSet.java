@@ -79,7 +79,9 @@ public class CPUnlockSignSet
 
     public CPUnlockSign getSignByName(String name) {
         for (CPUnlockSign thisSign : this.signs.values()) {
-            if (!thisSign.getName().equalsIgnoreCase(name)) continue;
+            if (!thisSign.getName().equalsIgnoreCase(name)) {
+                continue;
+            }
             return thisSign;
         }
         return null;

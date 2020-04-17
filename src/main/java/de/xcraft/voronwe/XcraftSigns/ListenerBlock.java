@@ -23,22 +23,22 @@ public class ListenerBlock implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         if (event.getPlayer().hasPermission("XcraftSigns.checkpoints.create")
-            && !event.isCancelled()) {
-            if (event.getBlock().getType() == Material.WALL_SIGN
-                && this.plugin.getCPUnlockSigns()
-                .getSignByLocation(event.getBlock().getLocation()) != null) {
+                && !event.isCancelled()) {
+            if (event.getBlock().getType().name().contains("SIGN")
+                    && this.plugin.getCPUnlockSigns()
+                                  .getSignByLocation(event.getBlock().getLocation()) != null) {
                 this.plugin.getCPUnlockSigns().removeSignByLocation(event.getBlock().getLocation());
             }
-            if (event.getBlock().getType() == Material.WALL_SIGN
-                && this.plugin.getCPEntrySigns()
-                .getSignByLocation(event.getBlock().getLocation()) != null) {
+            if (event.getBlock().getType().name().contains("SIGN")
+                    && this.plugin.getCPEntrySigns()
+                                  .getSignByLocation(event.getBlock().getLocation()) != null) {
                 this.plugin.getCPEntrySigns().removeSignByLocation(event.getBlock().getLocation());
             }
             if (event.getBlock().getType() == Material.LEVER
-                && this.plugin.getCPEntrySigns()
-                .getSignByLeverLocation(event.getBlock().getLocation()) != null) {
+                    && this.plugin.getCPEntrySigns()
+                                  .getSignByLeverLocation(event.getBlock().getLocation()) != null) {
                 CPEntrySign thisSign = this.plugin.getCPEntrySigns()
-                    .getSignByLeverLocation(event.getBlock().getLocation());
+                                                  .getSignByLeverLocation(event.getBlock().getLocation());
                 event.getBlock().getWorld().getBlockAt(thisSign.getLocation()).breakNaturally();
                 this.plugin.getCPEntrySigns().remove(thisSign);
             }
@@ -55,8 +55,8 @@ public class ListenerBlock implements Listener {
             sign.update();
         }
         if (event.getPlayer().hasPermission("XcraftSigns.checkpoints.create")
-            && event.getLine(0).length() > 10
-            && event.getLine(0).equalsIgnoreCase("[cp_unlock]")) {
+                && event.getLine(0).length() > 10
+                && event.getLine(0).equalsIgnoreCase("[cp_unlock]")) {
             CPUnlockSign newSign = new CPUnlockSign(
                 SLocation.getLocationString(event.getBlock().getLocation()),
                 SLocation.getLocationString(event.getPlayer().getLocation()), event.getLine(1),
@@ -66,8 +66,8 @@ public class ListenerBlock implements Listener {
             this.plugin.getCPUnlockSigns().add(newSign);
         }
         if (event.getPlayer().hasPermission("XcraftSigns.checkpoints.create")
-            && event.getLine(0).length() > 9
-            && event.getLine(0).equalsIgnoreCase("[cp_entry]")) {
+                && event.getLine(0).length() > 9
+                && event.getLine(0).equalsIgnoreCase("[cp_entry]")) {
             String name = event.getLine(1);
             if (name == null || this.plugin.getCPUnlockSigns().getSignByName(name) == null) {
                 event.getPlayer().sendMessage(ChatColor.RED + "no suitable checkpoint found.");
@@ -77,16 +77,18 @@ public class ListenerBlock implements Listener {
             }
             Block lever = null;
             Block attached = event.getBlock()
-                .getRelative(((org.bukkit.material.Sign) event.getBlock()
-                    .getState()
-                    .getData()).getAttachedFace());
+                                  .getRelative(((org.bukkit.material.Sign) event.getBlock()
+                                                                                .getState()
+                                                                                .getData()).getAttachedFace());
             for (int x = attached.getX() - 1; x <= attached.getX() + 1; ++x) {
                 for (int y = attached.getY() - 1; y <= attached.getY() + 1; ++y) {
                     for (int z = attached.getZ() - 1; z <= attached.getZ() + 1; ++z) {
                         Block check = event.getBlock().getWorld().getBlockAt(x, y, z);
                         if (check.getType() != Material.LEVER || !check.getRelative(
                             ((Lever) check.getState().getData()).getAttachedFace())
-                            .equals((Object) attached)) continue;
+                                                                       .equals((Object) attached)) {
+                            continue;
+                        }
                         lever = check;
                     }
                 }
@@ -101,8 +103,8 @@ public class ListenerBlock implements Listener {
                 newSign.setDuration(duration);
             } catch (Exception ex) {
                 event.getPlayer()
-                    .sendMessage(
-                        (Object) ChatColor.RED + "invalid or no duration given - using default (2)");
+                     .sendMessage(
+                         (Object) ChatColor.RED + "invalid or no duration given - using default (2)");
             }
             String strReward = event.getLine(3);
             try {
@@ -110,8 +112,8 @@ public class ListenerBlock implements Listener {
                 newSign.setReward(reward);
             } catch (Exception ex) {
                 event.getPlayer()
-                    .sendMessage(
-                        (Object) ChatColor.RED + "invalid or no reward given - using default (0)");
+                     .sendMessage(
+                         (Object) ChatColor.RED + "invalid or no reward given - using default (0)");
             }
             newSign.updateSign();
             this.plugin.getCPEntrySigns().add(newSign);

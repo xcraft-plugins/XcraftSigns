@@ -6,7 +6,10 @@ import de.xcraft.voronwe.XcraftSigns.XcraftSigns;
 import org.bukkit.Location;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -29,16 +32,16 @@ public class CPEntrySignSet implements Iterable<CPEntrySign> {
         int counter = 0;
         try {
             Yaml yaml = new Yaml();
-            Map<String, Map<String, String>> signsYaml = yaml.load((InputStream) new FileInputStream(configFile));
+            Map<String, Map<String, String>> signsYaml = yaml.load(new FileInputStream(configFile));
             if (signsYaml == null) {
                 this.plugin.log.info(
                     this.plugin.getNameBrackets() + "empty CPEntrySigns.yml - initializing");
                 return;
             }
             for (Map.Entry<String, Map<String, String>> thisSign : signsYaml.entrySet()) {
-                Map<String, String> signData = (Map<String, String>) thisSign.getValue();
-                CPEntrySign newSign = new CPEntrySign((String) signData.get("location"),
-                    (String) signData.get("leverlocation"), (String) signData.get("name"));
+                Map<String, String> signData = thisSign.getValue();
+                CPEntrySign newSign = new CPEntrySign(signData.get("location"),
+                    signData.get("leverlocation"), signData.get("name"));
                 newSign.setDuration(Cast.castInt(signData.get("duration")));
                 newSign.setReward(Cast.castDouble(signData.get("reward")));
                 this.add(newSign);
@@ -75,8 +78,9 @@ public class CPEntrySignSet implements Iterable<CPEntrySign> {
 
     public CPEntrySign getSignByLeverLocation(Location loc) {
         for (CPEntrySign thisSign : this.signs.values()) {
-            if (!thisSign.hasLever() || !thisSign.getLever().getLocation().equals((Object) loc))
+            if (!thisSign.hasLever() || !thisSign.getLever().getLocation().equals(loc)) {
                 continue;
+            }
             return thisSign;
         }
         return null;
